@@ -35,3 +35,9 @@ Java SE 9（2017年9月21日）
 ~~~ java
 インターフェース名 オブジェクト名 = (引数1, 引数2, ・・・) -> {return 処理内容};
 ~~~
+#### Stream API
+map  
+filter  
+sorted  
+distinct  
+limit  
