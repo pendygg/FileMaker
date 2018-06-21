@@ -150,7 +150,9 @@ formula.calculate(100); // 100.0
 formula.sqrt(16); // 4.0
 ~~~
 
-
+~~~ java
+Formula formula = a -> Math.sqrt(a*100);
+~~~
 
 
 
