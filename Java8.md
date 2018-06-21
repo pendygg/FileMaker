@@ -31,10 +31,38 @@ Java SE 7（2011年7月28日）
 Java SE 9（2017年9月21日）  
   
 #### Lambda　ラムダ式
-ラムダ式とは一言でいうと、**「メソッド定義を式として扱える機能」**のことです.  
+ラムダ式とは一言でいうと、「**メソッド定義を式として扱える機能**」のことです.  
 ~~~ java
 インターフェース名 オブジェクト名 = (引数1, 引数2, ・・・) -> {return 処理内容};
 ~~~
+関数型インターフェースを実装するための記述を簡潔に書けるメリットがあります.  
+Java7：
+~~~ java
+List<String> names = Arrays.asList("peter", "anna", "mike", "xenia");
+
+Collections.sort(names, new Comparator<String>() {
+    @Override
+    public int compare(String a, String b) {
+        return b.compareTo(a);
+    }
+});
+~~~
+Java8：
+~~~ java
+Collections.sort(names, (String a, String b) -> {
+    return b.compareTo(a);
+});
+~~~
+
+~~~ java
+Collections.sort(names, (String a, String b) -> b.compareTo(a));
+~~~
+
+~~~ java
+Collections.sort(names, (a, b) -> b.compareTo(a));
+~~~
+
+
 #### Stream API
 map  
 filter  
