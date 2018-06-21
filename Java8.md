@@ -64,8 +64,64 @@ Collections.sort(names, (a, b) -> b.compareTo(a));
 
 
 #### Stream API
-map  
-filter  
-sorted  
-distinct  
-limit  
+よく使うと思われるStream APIについて表にまとめました.  
+
+|Stream API|説明|記述例|
+|:--|:--|:--|
+|map|四則演算などの一時的な処理|list.stream().map(x -> x * 2)|
+|filter|条件を満たす場合だけの処理|list.stream().filter(x -> x >= 2)|
+|sorted|順番に並べる処理|list.stream().sorted()|
+|distinct|重複する値を排除する処理|list.stream().distinct()|
+|limit|扱うデータ件数を制限する処理|list.stream().limit(3)|
+
+プログラムが簡潔でわかりやすくなっています.  
+~~~ java
+List<String> stringCollection = new ArrayList<>();
+stringCollection.add("ddd2");
+stringCollection.add("aaa2");
+stringCollection.add("bbb1");
+stringCollection.add("aaa1");
+stringCollection.add("bbb3");
+stringCollection.add("ccc");
+stringCollection.add("bbb2");
+stringCollection.add("ddd1");
+~~~
+
+~~~ java
+stringCollection
+.stream()
+.filter((s) -> s.startsWith("a"))
+.map(String::toUpperCase)
+.sorted((a, b) -> b.compareTo(a))
+.forEach(System.out::println);
+
+// "AAA2", "AAA1"
+~~~
+
+#### Optional
+値のない状態を「null」と言いますが、開発中はnullが原因で意図していないエラーが起こることが多いです.  
+**NullPointerEception**
+そのため、エラーを未然に防ぐためにnullチェックの処理を書く必要がありました.  
+一般的にはif文を使って変数内の値がnullかどうかを確認します.  
+このOptionalを使うと、値がnullであるかどうかを簡潔に書くことができます.
+
+~~~ java
+String str = null;
+Optional<String> value = Optional.ofNullable(str);
+value.ifPresent(System.out::println);
+~~~
+
+#### 日付時刻API
+元々Java7までの日付、時間の扱いはとても面倒くさいものでした.  
+DateやCalenderクラスを扱うのは面倒で機能も乏しいです.  
+これに対して、Java8では日時クラスの機能が強化されいろいろな処理ができるようになりました.  
+
+|日付時刻API|説明|記述例|
+|:--|:--|:--|
+|Instant |日時（エポック秒）|Instant now = Instant.now()|
+|LocalDateTime|タイムゾーンなし日時|LocalDateTime now = LocalDateTime.now()|
+|ZonedDateTime|タイムゾーンあり日時|ZonedDateTime now = ZonedDateTime.now(ZoneId.of("Asia/Tokyo"))|
+
+
+
+
