@@ -6,6 +6,7 @@
 - Stream
 - Optional
 - Date and Time
+- defaultメソッド
 ***
 #### About Java
 Javaとは1990年代に**SunMicrosystems**が開発・発表したオブジェクト指向言語です.  
@@ -100,7 +101,7 @@ stringCollection
 
 #### Optional
 値のない状態を「null」と言いますが、開発中はnullが原因で意図していないエラーが起こることが多いです.  
-**NullPointerEception**
+**NullPointerEception**  
 そのため、エラーを未然に防ぐためにnullチェックの処理を書く必要がありました.  
 一般的にはif文を使って変数内の値がnullかどうかを確認します.  
 このOptionalを使うと、値がnullであるかどうかを簡潔に書くことができます.
@@ -121,6 +122,36 @@ DateやCalenderクラスを扱うのは面倒で機能も乏しいです.
 |Instant |日時（エポック秒）|Instant now = Instant.now()|
 |LocalDateTime|タイムゾーンなし日時|LocalDateTime now = LocalDateTime.now()|
 |ZonedDateTime|タイムゾーンあり日時|ZonedDateTime now = ZonedDateTime.now(ZoneId.of("Asia/Tokyo"))|
+
+#### defaultメソッド
+Java7まで、interfaceが実装を持つことはできませんでしたが、  
+Java8からはデフォルト実装をもつdefaultメソッドを持つことができるようになりました。
+
+interfaceにdefaultメソッドがあれば、interfaceを実装するクラスでオーバーライドする必要のないメソッドは書く必要がありません。
+~~~ java
+interface Formula {
+    double calculate(int a);
+
+    default double sqrt(int a) {
+        return Math.sqrt(a);
+    }
+}
+~~~
+
+~~~ java
+Formula formula = new Formula() {
+    @Override
+    public double calculate(int a) {
+        return sqrt(a * 100);
+    }
+};
+
+formula.calculate(100); // 100.0
+formula.sqrt(16); // 4.0
+~~~
+
+
+
 
 
 
