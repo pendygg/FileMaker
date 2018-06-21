@@ -6,7 +6,7 @@
 - Stream
 - Optional
 - Date and Time
-- defaultメソッド
+- default method
 ***
 #### About Java
 Javaとは1990年代に**SunMicrosystems**が開発・発表したオブジェクト指向言語です.  
